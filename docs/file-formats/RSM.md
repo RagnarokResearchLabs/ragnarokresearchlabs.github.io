@@ -29,13 +29,117 @@ import TabItem from '@theme/TabItem';
 <TabItem value="1.4" label="Version 1.4">
 
 ```cpp title="RSM File Format (v1.4)"
+struct NullTerminatedString{
+    char Buffer[40];
+};
+
 struct RagnarokRSM {
     char Signature[3];
-    uint8_t VersionMinor;
     uint8_t VersionMajor;
-    uint16_t AnimationClipCount;
-    uint8_t UnusedHeaderField[10];
-    struct AnimationClip AnimationClips[AnimationClipCount];
+    uint8_t VersionMinor;
+    int32_t VersionDependentAnimationLength;
+    int32_t ShadingModeID;
+    uint8_t ModelOpacity;
+    char UnusedZeroBytes[16];
+    int32_t TextureCount;
+    struct NullTerminatedString DiffuseTexturePaths[TextureCount];
+    struct NullTerminatedString RootNodeName;
+    int32_t MeshCount;
+    struct Mesh Meshes[MeshCount];
+};
+```
+
+</TabItem>
+<TabItem value="1.5" label="Version 1.5">
+
+```cpp title="RSM File Format (v1.5)"
+struct NullTerminatedString{
+    char Buffer[40];
+};
+
+struct RagnarokRSM {
+    char Signature[3];
+    uint8_t VersionMajor;
+    uint8_t VersionMinor;
+    int32_t VersionDependentAnimationLength;
+    int32_t ShadingModeID;
+    uint8_t ModelOpacity;
+    char UnusedZeroBytes[16];
+    int32_t TextureCount;
+    struct NullTerminatedString DiffuseTexturePaths[TextureCount];
+    struct NullTerminatedString RootNodeName;
+    int32_t MeshCount;
+    struct Mesh Meshes[MeshCount];
+};
+```
+
+</TabItem>
+<TabItem value="2.2" label="Version 2.2">
+
+```cpp title="RSM File Format (v2.2)"
+// diff-remove-start
+struct NullTerminatedString{
+    char Buffer[40];
+};
+// diff-remove-end
+// diff-add-start
+struct CountedString{
+    int32_t Size;
+    char Buffer[Size];
+};
+// diff-add-end
+
+struct RagnarokRSM {
+    char Signature[3];
+    uint8_t VersionMajor;
+    uint8_t VersionMinor;
+    int32_t VersionDependentAnimationLength;
+    int32_t ShadingModeID;
+    uint8_t ModelOpacity;
+    // diff-remove
+    char UnusedZeroBytes[16];
+    // diff-add
+    float AnimationSpeedFPS;
+    int32_t TextureCount;
+    // diff-remove-start
+    struct NullTerminatedString DiffuseTexturePaths[TextureCount];
+    struct NullTerminatedString RootNodeName;
+    // diff-remove-end
+    // diff-add-start
+    struct CountedString DiffuseTexturePaths[TextureCount];
+    int32_t RootNodeCount;
+    struct CountedString RootNodeNames[RootNodeCount];
+    // diff-add-end
+    int32_t MeshCount;
+    struct Mesh Meshes[MeshCount];
+};
+```
+
+</TabItem>
+<TabItem value="2.3" label="Version 2.3">
+
+```cpp title="RSM File Format (v2.3)"
+struct CountedString{
+    int32_t Size;
+    char Buffer[Size];
+};
+
+struct RagnarokRSM {
+    char Signature[3];
+    uint8_t VersionMajor;
+    uint8_t VersionMinor;
+    int32_t VersionDependentAnimationLength;
+    int32_t ShadingModeID;
+    uint8_t ModelOpacity;
+    float AnimationSpeedFPS;
+    // diff-remove-start
+    int32_t TextureCount;
+    struct NullTerminatedString DiffuseTexturePaths[TextureCount];
+    // diff-remove-end
+    int32_t RootNodeCount;
+    struct CountedString RootNodeNames[RootNodeCount];
+    int32_t MeshCount;
+    struct Mesh Meshes[MeshCount];
 };
 ```
 
