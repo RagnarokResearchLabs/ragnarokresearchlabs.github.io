@@ -1,6 +1,6 @@
 ---
 slug: /file-formats/rsm
-title: RSM (Placeholder)
+title: RSM
 ---
 
 :::info
