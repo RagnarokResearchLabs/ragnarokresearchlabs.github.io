@@ -33,6 +33,11 @@ struct NullTerminatedString{
     char Buffer[40];
 };
 
+struct Mesh{
+    struct NullTerminatedString NodeName;
+    struct NullTerminatedString ParentNodeName;
+};
+
 struct RagnarokRSM {
     char Signature[3];
     uint8_t VersionMajor;
@@ -55,6 +60,11 @@ struct RagnarokRSM {
 ```cpp title="RSM File Format (v1.5)"
 struct NullTerminatedString{
     char Buffer[40];
+};
+
+struct Mesh{
+    struct NullTerminatedString NodeName;
+    struct NullTerminatedString ParentNodeName;
 };
 
 struct RagnarokRSM {
@@ -89,6 +99,17 @@ struct CountedString{
 };
 // diff-add-end
 
+struct Mesh{
+    // diff-remove-start
+    struct NullTerminatedString NodeName;
+    struct NullTerminatedString ParentNodeName;
+    // diff-remove-end
+    // diff-add-start
+    struct CountedString NodeName;
+    struct CountedString ParentNodeName;
+    // diff-add-end
+};
+
 struct RagnarokRSM {
     char Signature[3];
     uint8_t VersionMajor;
@@ -122,6 +143,13 @@ struct RagnarokRSM {
 struct CountedString{
     int32_t Size;
     char Buffer[Size];
+};
+
+struct Mesh{
+    struct CountedString NodeName;
+    struct CountedString ParentNodeName;
+    // diff-add-start
+    // diff-add-end
 };
 
 struct RagnarokRSM {
