@@ -33,11 +33,21 @@ struct NullTerminatedString{
     char Buffer[40];
 };
 
+struct Vector3D{
+    float x;
+    float y;
+    float z;
+};
+
+struct Matrix4D {
+
+};
+
 struct Mesh{
     struct NullTerminatedString NodeName;
     struct NullTerminatedString ParentNodeName;
     int32_t TextureIndicesCount;
-    int32_t DiffuseTextureIndices [TextureIndicesCount];
+    int32_t DiffuseTextureIndices[TextureIndicesCount];
 };
 
 struct RagnarokRSM {
@@ -68,7 +78,7 @@ struct Mesh{
     struct NullTerminatedString NodeName;
     struct NullTerminatedString ParentNodeName;
     int32_t TextureIndicesCount;
-    int32_t DiffuseTextureIndices [TextureIndicesCount];
+    int32_t DiffuseTextureIndices[TextureIndicesCount];
 };
 
 struct RagnarokRSM {
@@ -113,7 +123,7 @@ struct Mesh{
     struct CountedString ParentNodeName;
     // diff-add-end
     int32_t TextureIndicesCount;
-    int32_t DiffuseTextureIndices [TextureIndicesCount];
+    int32_t DiffuseTextureIndices[TextureIndicesCount];
 };
 
 struct RagnarokRSM {
@@ -156,7 +166,7 @@ struct Mesh{
     struct CountedString ParentNodeName;
     // diff-remove-start
     int32_t TextureIndicesCount;
-    int32_t DiffuseTextureIndices [TextureIndicesCount];
+    int32_t DiffuseTextureIndices[TextureIndicesCount];
     // diff-remove-end
     // diff-add-start
     int32_t TextureCount;
