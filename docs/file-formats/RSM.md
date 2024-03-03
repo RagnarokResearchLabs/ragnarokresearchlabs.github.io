@@ -36,6 +36,8 @@ struct NullTerminatedString{
 struct Mesh{
     struct NullTerminatedString NodeName;
     struct NullTerminatedString ParentNodeName;
+    int32_t TextureIndicesCount;
+    int32_t DiffuseTextureIndices [TextureIndicesCount];
 };
 
 struct RagnarokRSM {
@@ -65,6 +67,8 @@ struct NullTerminatedString{
 struct Mesh{
     struct NullTerminatedString NodeName;
     struct NullTerminatedString ParentNodeName;
+    int32_t TextureIndicesCount;
+    int32_t DiffuseTextureIndices [TextureIndicesCount];
 };
 
 struct RagnarokRSM {
@@ -108,6 +112,8 @@ struct Mesh{
     struct CountedString NodeName;
     struct CountedString ParentNodeName;
     // diff-add-end
+    int32_t TextureIndicesCount;
+    int32_t DiffuseTextureIndices [TextureIndicesCount];
 };
 
 struct RagnarokRSM {
@@ -148,7 +154,13 @@ struct CountedString{
 struct Mesh{
     struct CountedString NodeName;
     struct CountedString ParentNodeName;
+    // diff-remove-start
+    int32_t TextureIndicesCount;
+    int32_t DiffuseTextureIndices [TextureIndicesCount];
+    // diff-remove-end
     // diff-add-start
+    int32_t TextureCount;
+    struct NullTerminatedString DiffuseTexturePaths[TextureCount];
     // diff-add-end
 };
 
